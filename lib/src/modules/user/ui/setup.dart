@@ -69,7 +69,7 @@ class _SetupPageState extends State<SetupPage> {
       if (deepLink.queryParameters["uname"] != null &&
           deepLink.queryParameters["uname"] != "") {
         //// FOr setting icon start
-        String _dbKey = deepLink.queryParameters["dbapikey"] != null
+        String? _dbKey = deepLink.queryParameters["dbapikey"] != null
             ? deepLink.queryParameters["dbapikey"]
             : deepLink.queryParameters["dbApiKey"];
         // Setting icon end
@@ -78,7 +78,7 @@ class _SetupPageState extends State<SetupPage> {
         Globals.isOpenByLink = true;
         await setDbKey(_dbKey);
       } else {
-        String _dbKey = deepLink.path.split("/").last;
+        String? _dbKey = deepLink.path.split("/").last;
         await setDbKey(_dbKey);
       }
     } else {

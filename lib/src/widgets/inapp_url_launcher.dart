@@ -4,10 +4,10 @@ import 'package:webview_flutter/webview_flutter.dart';
 class InAppUrlLauncer extends StatefulWidget {
   final String title;
   final String url;
-  final bool hideHeader;
+  final bool? hideHeader;
   @override
   InAppUrlLauncer(
-      {Key key, @required this.title, @required this.url, this.hideHeader})
+      {Key? key, required this.title, required this.url, this.hideHeader})
       : super(key: key);
   _InAppUrlLauncerState createState() => new _InAppUrlLauncerState();
 }
@@ -30,7 +30,7 @@ class _InAppUrlLauncerState extends State<InAppUrlLauncer> {
     return new Scaffold(
         appBar: AppBar(
           title: Text(
-            widget.title ?? '',
+            widget.title,
             style:
                 TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),
           ),

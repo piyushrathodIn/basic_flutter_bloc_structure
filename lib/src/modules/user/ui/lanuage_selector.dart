@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class LanguageSelector {
   final SharedPreferencesFn _sharedPref = SharedPreferencesFn();
-  String selectedLanguage;
+  String? selectedLanguage;
 
   LanguageSelector(context, onLanguageChanged) {
     geLanguage(context, onLanguageChanged);
@@ -48,12 +48,12 @@ class LanguageSelector {
           contentPadding: EdgeInsets.zero,
           // activeColor: ,
           value: selectedLanguage == languagesMap[language] ? true : false,
-          onChanged: (val) {
+          onChanged: (dynamic val) {
             setLanguage(language, context, onLanguageChanged);
           },
           groupValue: true,
           title:
-              Text(language ?? '', style: Theme.of(context).textTheme.caption),
+              Text(language, style: Theme.of(context).textTheme.caption),
         ),
       );
 
@@ -71,10 +71,10 @@ class LanguageSelector {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
-                      AppTranslations.of(context).text('change_language'),
+                      AppTranslations.of(context)!.text('change_language'),
                       style: Theme.of(context)
                           .textTheme
-                          .headline6
+                          .headline6!
                           .copyWith(fontSize: AppTheme.kBottomSheetTitleSize),
                     ),
                     IconButton(

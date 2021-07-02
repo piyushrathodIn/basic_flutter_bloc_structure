@@ -19,7 +19,7 @@ class CustomFlutterIcons {
   CustomFlutterIcons._();
 
   static const _kFontFam = 'CustomFlutterIcons';
-  static const String _kFontPkg = null;
+  static const String? _kFontPkg = null;
 
   static const IconData add_suggestion_icon = IconData(0xe80b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData all_moods_icon = IconData(0xe80c, fontFamily: _kFontFam, fontPackage: _kFontPkg);

@@ -6,5 +6,5 @@ class ResponseModel extends Equatable {
 
   ResponseModel({this.statusCode, this.data});
 
-  List<Object> get props => [statusCode, data];
+  List<Object?> get props => [statusCode, data];
 }

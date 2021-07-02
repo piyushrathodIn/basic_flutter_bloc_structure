@@ -13,9 +13,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../styles/theme.dart';
 
 class LoginPage extends StatefulWidget {
-  final String msg;
-  final bool isInitial;
-  LoginPage({Key key, this.msg, this.isInitial}) : super(key: key);
+  // final String? msg;
+  // final bool? isInitial;
+  // LoginPage({Key? key, this.msg, this.isInitial}) : super(key: key);
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -26,11 +26,11 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   ScrollController _scrollController = ScrollController();
 
-  final ValueNotifier<int> _currentFocusedFieldNumber =
-      ValueNotifier<int>(null);
+  final ValueNotifier<int?> _currentFocusedFieldNumber =
+      ValueNotifier<int?>(null);
 
-  String username;
-  String password;
+  String? username;
+  String? password;
   final focus = FocusNode();
   bool showPassword = false;
 
@@ -43,18 +43,10 @@ class _LoginPageState extends State<LoginPage> {
     _usernameFocus.addListener(() => _onFocusChange(0, _usernameFocus));
     _passwordFocus.addListener(() => _onFocusChange(1, _passwordFocus));
     _bloc.add(InitLogin());
-    if (widget.msg != null && widget.msg != "") {
-      checkForMessages();
-    }
   }
 
   void _onFocusChange(i, focusNode) {
     _currentFocusedFieldNumber.value = focusNode.hasFocus ? i : null;
-  }
-
-  checkForMessages() async {
-    await Future.delayed(Duration(milliseconds: 1000));
-    Utility.showSnackBar(_scaffoldKey, "${widget.msg}", context);
   }
 
   login() async {
@@ -65,8 +57,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _handleSubmitted(String value) {
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
       login();
     }
   }
@@ -75,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _inputLabel(AppTranslations.of(context).text('username'), 0),
+        _inputLabel(AppTranslations.of(context)!.text('username'), 0),
         Material(
           elevation: 2,
           borderRadius: BorderRadius.circular(AppTheme.kBorderRadius),
@@ -84,15 +76,15 @@ class _LoginPageState extends State<LoginPage> {
             focusNode: _usernameFocus,
             onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
             keyboardType: TextInputType.emailAddress,
-            validator: (value) => value.isEmpty
-                ? (AppTranslations.of(context)
+            validator: (value) => value!.isEmpty
+                ? (AppTranslations.of(context)!
                     .text('username_validation_error'))
                 : null,
             onSaved: (value) => username = value,
             // style: Theme.of(context).textTheme.caption,
             style: Theme.of(context).textTheme.caption,
             decoration: InputDecoration(
-              hintText: AppTranslations.of(context).text('username_hint'),
+              hintText: AppTranslations.of(context)!.text('username_hint'),
             ),
           ),
         )
@@ -103,12 +95,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget _inputLabel(label, i) => Column(
         children: [
           ValueListenableBuilder(
-            builder: (BuildContext context, int value, Widget child) {
+            builder: (BuildContext context, int? value, Widget? child) {
               return Row(
                 children: <Widget>[
                   Text("$label",
                       style: i == _currentFocusedFieldNumber.value
-                          ? Theme.of(context).textTheme.subtitle1.copyWith(
+                          ? Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Theme.of(context).colorScheme.primary)
                           : Theme.of(context).textTheme.subtitle1),
                 ],
@@ -125,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _inputLabel(AppTranslations.of(context).text('password'), 1),
+        _inputLabel(AppTranslations.of(context)!.text('password'), 1),
         Material(
           borderRadius: BorderRadius.circular(AppTheme.kBorderRadius),
           elevation: 2,
@@ -135,8 +127,8 @@ class _LoginPageState extends State<LoginPage> {
             focusNode: _passwordFocus,
             textInputAction: TextInputAction.next,
             onFieldSubmitted: _handleSubmitted,
-            validator: (value) => value.isEmpty
-                ? (AppTranslations.of(context)
+            validator: (value) => value!.isEmpty
+                ? (AppTranslations.of(context)!
                     .text('password_validation_error'))
                 : null,
             onSaved: (value) => password = value,
@@ -156,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                     showPassword = !showPassword;
                     setState(() {});
                   }),
-              hintText: AppTranslations.of(context).text('password_hint'),
+              hintText: AppTranslations.of(context)!.text('password_hint'),
             ),
             obscuringCharacter: "*",
           ),
@@ -168,8 +160,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildForgotPasswordBtn() {
     return Container(
       alignment: Alignment.centerRight,
-      child: Text(AppTranslations.of(context).text('forgot_password'),
-          style: Theme.of(context).textTheme.subtitle1.copyWith(
+      child: Text(AppTranslations.of(context)!.text('forgot_password'),
+          style: Theme.of(context).textTheme.subtitle1!.copyWith(
                 decoration: TextDecoration.underline,
               )),
     );
@@ -177,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildLoginBtn(state) {
     return CommonButtonWidget(
-      buttonText: AppTranslations.of(context).text('login'),
+      buttonText: AppTranslations.of(context)!.text('login'),
       isLoading: state is Loading ? true : false,
       onTap: (val) {
         _currentFocusedFieldNumber.value = null;
@@ -185,8 +177,8 @@ class _LoginPageState extends State<LoginPage> {
         if (state is Loading) {
           print("Already in process...");
         } else {
-          if (_formKey.currentState.validate()) {
-            _formKey.currentState.save();
+          if (_formKey.currentState!.validate()) {
+            _formKey.currentState!.save();
             login();
           }
         }
@@ -210,10 +202,10 @@ class _LoginPageState extends State<LoginPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                AppTranslations.of(context).text('login'),
+                                AppTranslations.of(context)!.text('login'),
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline4
+                                    .headline4!
                                     .copyWith(color: AppTheme.kFontColor1),
                               ),
                             ]),
@@ -225,7 +217,7 @@ class _LoginPageState extends State<LoginPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                AppTranslations.of(context)
+                                AppTranslations.of(context)!
                                     .text('login_subtitle'),
                                 style: Theme.of(context).textTheme.subtitle1,
                               ),
@@ -253,7 +245,7 @@ class _LoginPageState extends State<LoginPage> {
                                                     url: Overrides
                                                         .forgotPasswordUrl,
                                                     title: AppTranslations.of(
-                                                            context)
+                                                            context)!
                                                         .text(
                                                             'forgot_password'),
                                                   )));
@@ -278,8 +270,9 @@ class _LoginPageState extends State<LoginPage> {
     Utility.upliftPage(context, _scrollController);
     print(DefaultTextStyle.of(context).style.fontFamily);
     return WillPopScope(
-      // ignore: missing_return
-      onWillPop: () {},
+      onWillPop: () async {
+        return true;
+      },
       child: Scaffold(
           key: _scaffoldKey,
           body: ListView(
@@ -291,13 +284,12 @@ class _LoginPageState extends State<LoginPage> {
                   builder: (BuildContext context, UserState state) {
                     if (state is UserInitial) {
                       return Container(
-                              margin: EdgeInsets.only(
-                            top: Utility.displayHeight(context) * 0.30),
+                          margin: EdgeInsets.only(
+                              top: Utility.displayHeight(context) * 0.30),
                           color: Theme.of(context).backgroundColor,
                           child: Center(
                               child: Image.asset('assets/images/splash.png',
                                   fit: BoxFit.cover)));
-                     
                     } else {
                       return _loginSection(state);
                     }
@@ -308,7 +300,8 @@ class _LoginPageState extends State<LoginPage> {
                   if (state is InvalidCredentials) {
                     Utility.showSnackBar(
                         _scaffoldKey,
-                        AppTranslations.of(context).text('invalid_credentials'),
+                        AppTranslations.of(context)!
+                            .text('invalid_credentials'),
                         context);
                   }
                   if (state is LoginSuccess) {

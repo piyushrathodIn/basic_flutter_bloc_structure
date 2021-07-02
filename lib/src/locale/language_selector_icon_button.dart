@@ -7,15 +7,15 @@ class LanguageSelectorIconButton extends StatelessWidget {
   LanguageSelectorIconButton(this.color);
   @override
   Widget build(BuildContext context) {
-    // return IconButton(
-    //   onPressed: () {
-    //     _languageIconTapped(context);
-    //   },
-    //   icon: Icon(
-    //   IconDataSolid(0xf013),
-    //     color:color,
-    //   ),
-    // );
+    return IconButton(
+      onPressed: () {
+        // _languageIconTapped(context);
+      },
+      icon: Icon(
+        Icons.ac_unit,
+        color: color,
+      ),
+    );
   }
 
   // _languageIconTapped(BuildContext context) {

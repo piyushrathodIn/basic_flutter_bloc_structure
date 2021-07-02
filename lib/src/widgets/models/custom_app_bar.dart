@@ -49,5 +49,5 @@ class CustomAppBar extends Equatable {
 	bool get stringify => true;
 
 	@override
-	List<Object> get props => [leading, title, subtitle, trailing];
+	List<Object?> get props => [leading, title, subtitle, trailing];
 }

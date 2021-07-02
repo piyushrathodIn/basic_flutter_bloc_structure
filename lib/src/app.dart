@@ -15,7 +15,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  AppTranslationsDelegate _newLocaleDelegate;
+  AppTranslationsDelegate? _newLocaleDelegate;
   final SharedPreferencesFn _sharedPref = SharedPreferencesFn();
 
   @override
@@ -47,7 +47,7 @@ class _AppState extends State<App> {
       darkTheme: AppTheme.lightTheme,
       home: LoginPage(),
       localizationsDelegates: [
-        _newLocaleDelegate,
+        _newLocaleDelegate!,
         //provides localised strings
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

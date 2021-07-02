@@ -2,17 +2,17 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePictureWidget extends StatelessWidget {
-  final ValueChanged onTap;
-  final _user = null;
-  final String url;
-  final double radius;
+  final ValueChanged? onTap;
+  final dynamic _user = null;
+  final String? url;
+  final double? radius;
 
-  ProfilePictureWidget({Key key, this.onTap, this.radius, this.url})
+  ProfilePictureWidget({Key? key, this.onTap, this.radius, this.url})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String getUrl() {
+    String? getUrl() {
       if (url != null) return url;
       return _user["image"] != null ? _user["image"] : "";
     }
@@ -38,11 +38,11 @@ class ProfilePictureWidget extends StatelessWidget {
                 child: CachedNetworkImage(
           height: radius != null ? radius : 30,
           width: radius != null ? radius : 30,
-          imageUrl: getUrl(),
+          imageUrl: getUrl()!,
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
-                radius != null ? radius : 30,
+                radius != null ? radius! : 30,
               ),
               image: DecorationImage(
                 image: imageProvider,

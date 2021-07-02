@@ -17,7 +17,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   final SharedPreferencesFn _sharedPref = SharedPreferencesFn();
-  String selectedLanguage;
+  String? selectedLanguage;
 
   static final List<String> languagesList = application.supportedLanguages;
   static final List<String> languageCodesList =
@@ -27,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
     languageCodesList[1]: languagesList[1],
   };
 
-  final ValueNotifier<String> _currentLanguage = ValueNotifier<String>('');
+  final ValueNotifier<String?> _currentLanguage = ValueNotifier<String?>('');
 
   @override
   void initState() {
@@ -76,9 +76,9 @@ class _SettingsPageState extends State<SettingsPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ValueListenableBuilder(
-              builder: (BuildContext context, String value, Widget child) {
+              builder: (BuildContext context, String? value, Widget? child) {
                 return Text("${_currentLanguage.value}",
-                    style: Theme.of(context).textTheme.subtitle1.copyWith(
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
                         color: Theme.of(context).colorScheme.secondary));
               },
               valueListenable: _currentLanguage,
@@ -97,7 +97,7 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Column(
               children: <Widget>[
                 _listItem(
-                    AppTranslations.of(context).text('select_language'),
+                    AppTranslations.of(context)!.text('select_language'),
                     IconSelectorWidget(
                       'language_icon',
                       'asset',
@@ -105,11 +105,11 @@ class _SettingsPageState extends State<SettingsPage> {
                     'language_selector',
                     trailing: _languageNameIndicatorTrailing()),
                 _listItem(
-                    AppTranslations.of(context).text('profile'),
+                    AppTranslations.of(context)!.text('profile'),
                     IconSelectorWidget('profile_icon', 'asset'),
                     'user_profile'),
                 _listItem(
-                    AppTranslations.of(context).text('app_information'),
+                    AppTranslations.of(context)!.text('app_information'),
                     IconSelectorWidget('informative_icon', 'asset'),
                     'app_info'),
               ],
@@ -124,7 +124,7 @@ class _SettingsPageState extends State<SettingsPage> {
       topOverFlow: 30.0,
       customAppBar: CustomAppBar(
           leading: BackButtonWidget(),
-          title: AppTranslations.of(context).text('settings'),
+          title: AppTranslations.of(context)!.text('settings'),
           subtitle: 'Team bedrijfsbureau'),
       body: _body(),
     );

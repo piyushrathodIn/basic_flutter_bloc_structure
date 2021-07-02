@@ -47,5 +47,5 @@ class ErrorReceived extends UserState {
     return ErrorReceived(err: err ?? this.err);
   }
   @override
-  List<Object> get props => [err];
+  List<Object?> get props => [err];
 }

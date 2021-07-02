@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class CommonButtonWidget extends StatelessWidget {
   final String buttonText;
-  final ValueChanged onTap;
-  final bool isLoading;
+  final ValueChanged? onTap;
+  final bool? isLoading;
   CommonButtonWidget(
-      {Key key, @required this.buttonText, this.onTap, this.isLoading})
+      {Key? key, required this.buttonText, this.onTap, this.isLoading})
       : super(key: key);
 
   @override
@@ -116,7 +116,7 @@ class CommonButtonWidget extends StatelessWidget {
           Text(
             '$buttonText',
           ),
-          isLoading != null && isLoading
+          isLoading != null && isLoading!
               ? Container(
                   margin: EdgeInsets.only(left: 15),
                   height: 20,
@@ -131,7 +131,7 @@ class CommonButtonWidget extends StatelessWidget {
         ],
       ),
       onPressed: () {
-        onTap(true);
+        onTap!(true);
       },
 
       // shape: new RoundedRectangleBorder(

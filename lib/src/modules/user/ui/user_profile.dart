@@ -42,7 +42,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     "John Doe",
                     style: Theme.of(context)
                         .textTheme
-                        .headline6
+                        .headline6!
                         .copyWith(color: AppTheme.kFontColor1),
                   ),
                   SpacerWidget(8.0),
@@ -50,7 +50,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     "Team bedrijfsbureau",
                     style: Theme.of(context)
                         .textTheme
-                        .caption
+                        .caption!
                         .copyWith(color: AppTheme.kSecondaryColor),
                   ),
                   SizedBox(

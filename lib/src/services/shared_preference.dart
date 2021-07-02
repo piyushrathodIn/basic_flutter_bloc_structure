@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesFn {
@@ -11,7 +13,7 @@ class SharedPreferencesFn {
   // get string value
   Future<String> getString(String key) async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.get(key) ?? '';
+    return preferences.get(key) as FutureOr<String>? ?? '';
   }
 
   void clear() async {

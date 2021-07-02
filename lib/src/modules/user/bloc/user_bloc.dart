@@ -85,7 +85,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           newPassword: event.newPassword,
         );
         print(cred);
-        bool result = await _changePassword(cred.oldPassword, cred.newPassword);
+        bool result = await (_changePassword(cred.oldPassword, cred.newPassword) as FutureOr<bool>);
         if (result != null && result) {
           yield LoginSuccess();
         }
@@ -97,7 +97,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (event is LogOut) {
       yield Loading();
       // await resetDeviceId();
-      bool flag = await louout();
+      bool flag = await (louout() as FutureOr<bool>);
       print(flag);
       yield flag ? LoggedOut() : ErrorReceived();
     }
@@ -138,9 +138,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       final data = response.data;
       // Utility.printWrapped(json.encode(data['results'][0]));
       if (response.statusCode == 200) {
-        //return true;
+        return "";
       } else {
-        //  return false;
+         return "";
       }
     } catch (e) {
       throw (e);
